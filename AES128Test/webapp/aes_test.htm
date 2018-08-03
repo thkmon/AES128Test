@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AES128 Example</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+<link rel="stylesheet" href="/css/base.css">
+<script type="text/javascript" src="aes_util.js"></script>
+<script type="text/javascript">
+var g_keySize = 128;
+var g_iterationCount = 10000;
+var g_salt = "79752f1d3fd2432043c48e45b35b24645eb826a25c6f1804e9152665c345a552";
+var g_iv = "2fad5a477d13ecda7f718fbd8a9f0443";
+var g_passPhrase = "passPhrase";
+
+window.onload = function() {
+	
+	try {
+		var resultDiv = document.getElementById("resultDiv");
+		
+		var aesUtil = new AesUtil(g_keySize, g_iterationCount);
+		var encString = aesUtil.encrypt(g_salt, g_iv, g_passPhrase, "pass1234");
+		var decString = aesUtil.decrypt(g_salt, g_iv, g_passPhrase, encString);
+		
+		resultDiv.innerHTML = "encString : " + encString + "<br>" + "decString : " + decString;
+	
+	} catch (e) {
+		alert(e);
+		return false;
+	}
+	
+}
+</script>
+</head>
+<body>
+	AES128 Example
+	<br>
+	<div id="resultDiv"></div>
+</body>
+</html>
